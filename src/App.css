@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+
+.input-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.input-area input {
+  width: 100%;
+}
+
+.input-area2 input {
+  width: 100%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

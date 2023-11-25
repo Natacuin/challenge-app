@@ -18,6 +18,10 @@ function Title() {
 }
 
 async function analyzeImage(imageUrl) {
+  if (!API_KEY) {
+    console.error('Missing necessary environment variables. Please check your .env file or environment configuration.');
+    process.exit(1);
+  }
   const response = await fetch(API_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -60,12 +64,19 @@ function DisplayResults({ apiResponse }) {
 
 function App() {
   const [apiResponse, setApiResponse] = React.useState(null);
+  const [error, setError] = React.useState(null);
 
   const handleAnalyzeClick = async () => {
-    const imageUrl = document.querySelector('.input-area input').value;
-    const result = await analyzeImage(imageUrl);
-    console.log(result);
-    setApiResponse(result);
+    try {
+      const imageUrl = document.querySelector('.input-area input').value;
+      const result = await analyzeImage(imageUrl);
+      console.log(result);
+      setApiResponse(result);
+      setError(null);
+    }catch (err) {
+      setError(err.message);
+    }
+    
   };
 
   const handleGenerateClick = async () => {
@@ -92,12 +103,13 @@ function App() {
         <Title />
         <p>Insert URL or Type prompt:</p>
         <div className="input-area">
-          <input type="text" placeholder="Enter URL to analyze or textual prompt to generate an image" value='https://www.apta.com/wp-content/uploads/DSC06230-e1553280516425.jpg' />
+          <input type="text" placeholder="Enter URL to analyze or textual prompt to generate an image" />
         </div>
         <div className="input-area2">
           <button onClick={handleAnalyzeClick}>Analyze</button>
           <button onClick={handleGenerateClick}>Generate</button>
         </div>
+        {error && <p className="error-message">{error}</p>}
         {apiResponse && <DisplayResults apiResponse={apiResponse} />}
         {/* <img className="result-image" src={result} alt="result" /> */}
       </header>

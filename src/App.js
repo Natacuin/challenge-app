@@ -12,7 +12,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 function Title() {
   return (
     <div className="title">
-      <h1>Computer Vision App</h1>
+      <h1>Computer Vision App v2</h1>
     </div>
   );
 }

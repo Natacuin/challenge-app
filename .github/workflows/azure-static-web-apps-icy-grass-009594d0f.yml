@@ -33,10 +33,10 @@ jobs:
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
-          OPENAI_API_ENDPOINT: ${{ secrets.OPENAI_API_ENDPOINT }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
-          API_KEY: ${{ secrets.API_KEY }}
+          REACT_APP_OPENAI_API_ENDPOINT: ${{ secrets.OPENAI_API_ENDPOINT }}
+          REACT_APP_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          REACT_APP_API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
+          REACT_APP_API_KEY: ${{ secrets.API_KEY }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
